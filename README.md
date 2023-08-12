@@ -1,13 +1,35 @@
 ## mysql sync redis
+### 必要条件
+
+### mysql 需要开启如下配置。
+#### vim /etc/my.cnf
+```ini
+log-bin=mysql-bin           # 开启MySQL二进制日志
+binlog_format=ROW           # 将二进制日志的格式设置为ROW
+server_id=1                 # server_id 必须唯一
+```
+
+### 验证 mysql 配置是否正确
+```sql
+# 确保 binlog_format=ROW
+SHOW VARIABLES LIKE 'binlog_format';
+
+# 确保 log_bin=ON
+SHOW VARIABLES LIKE 'log_bin';
+```
+
+### 创建 canal 用户。并且赋值权限
+```sql
+CREATE USER canal IDENTIFIED BY 'canal';
+GRANT RELOAD, SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
+FLUSH PRIVILEGES;
+```
 
 ### 创建 config.yaml 
 ```yaml
 appName: mysql-sync-redis
 
 ## mysql 用户 必须拥有 RELOAD,SELECT, REPLICATION SLAVE, REPLICATION CLIENT 的权限。缺一不可
-## CREATE USER canal IDENTIFIED BY 'canal';
-## GRANT RELOAD,SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
-## FLUSH PRIVILEGES;
 mysql:
   addr: 127.0.0.1:3306
   username: canal
