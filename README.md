@@ -41,4 +41,24 @@ rules:
 
 ```
 
-### 下载可执行文件
+### [下载可执行文件](https://github.com/thousmile/mysql_sync_redis/releases)
+### 将 config.yaml 和 mysql_sync_redis 放在同一目录下
+
+#### Linux or MacOS
+```shell
+# 添加执行权限
+sudo chmod a+x mysql_sync_redis
+# 运行
+./mysql_sync_redis 
+```
+
+#### Windows
+```shell
+# 运行
+./mysql_sync_redis.exe
+```
+
+![](./images/1.png)
+![](./images/2.png)
+![](./images/3.png)
+
