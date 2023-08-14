@@ -35,6 +35,7 @@ func main() {
 	// FLUSH PRIVILEGES;
 	cfg.User = Config.Mysql.Username
 	cfg.Password = Config.Mysql.Password
+	cfg.Dump.ExecutionPath = ""
 	c, err := canal.NewCanal(cfg)
 	if err != nil {
 		log.Fatal(err)
